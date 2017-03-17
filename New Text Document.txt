@@ -1,10 +1,10 @@
 /*
   PROCESSINGJS.COM - BASIC EXAMPLE
-  Delayed Mouse Tracking  
+  Delayed Mouse Tracking
   MIT License - Hyper-Metrix.com/F1LT3R
-  Native Processing compatible 
-*/  
-
+  Native Processing compatible
+*/
+//hello my peeps!
 // Global variables
 float radius = 50.0;
 int X, Y;
@@ -19,34 +19,34 @@ void setup(){
   X = width / 2;
   Y = width / 2;
   nX = X;
-  nY = Y;  
+  nY = Y;
 }
 
 // Main draw loop
 void draw(){
-  
+
   radius = radius + sin( frameCount / 4 );
-  
+
   // Track circle to new destination
   X+=(nX-X)/delay;
   Y+=(nY-Y)/delay;
-  
+
   // Fill canvas grey
   background( 100 );
-  
+
   // Set fill-color to blue
   fill( 0, 121, 184 );
-  
+
   // Set stroke-color white
-  stroke(255); 
-  
+  stroke(255);
+
   // Draw circle
-  ellipse( X, Y, radius, radius );                  
+  ellipse( X, Y, radius, radius );
 }
 
 
 // Set circle's next destination
 void mouseMoved(){
   nX = mouseX;
-  nY = mouseY;  
+  nY = mouseY;
 }
