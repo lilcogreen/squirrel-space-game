@@ -1,5 +1,5 @@
 // Setup the Processing Canvas
-var count = 0;
+var count = 1;
 PImage squirrel;
 
 void setup() {
