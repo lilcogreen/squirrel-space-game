@@ -5,7 +5,7 @@ PImage squirrel;
 void setup() {
 	squirrel = loadImage("img/space_squirrel.gif");
 	size(800, 600);
-	drawScene1();
+	drawHomeScreen();
 }
 mouseClicked = function() {
 	count += 1;
@@ -13,7 +13,7 @@ mouseClicked = function() {
 		drawScene2();
 	}
 	else {
-		drawScene1();
+		drawHomeScreen();
 	}
 };
 
