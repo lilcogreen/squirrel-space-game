@@ -9,6 +9,7 @@ window.onload = function() {
 
     function preload () {
 
+        game.load.image('player', 'assets/img/space_squirrel.gif', 300, 400);
 
     };
 
