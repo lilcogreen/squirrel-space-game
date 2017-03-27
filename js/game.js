@@ -8,16 +8,49 @@ window.onload = function() {
     var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create });
 
     function preload () {
+        // Load Player
+        game.load.image('player', 'assets/img/space_squirrel.gif');
 
-        game.load.image('logo', 'phaser.png');
+        // Load Asteroid
+
+        // Load Oxygen Tank
+
+        // Load Fuel Tank
+
+        /* TODO: any new objects for the game, add the comment like above "//Load object"
+        */
 
     }
 
     function create () {
+      // Create player
+      createPlayer();
+      // Player created
 
-        var logo = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
-        logo.anchor.setTo(0.5, 0.5);
+      // Create Oxygen Tank
 
+      // Oxygen tank created
+
+      // Create Asteroid
+
+      // Asteroid created
+
+      // Create Fuel Tank
+
+      // Fuel Tank created
     }
 
+    function update() {
+      /* TODO Add function calls in here */
+      updatePlayer();
+
+  }
+  function createPlayer () {
+    var player = game.add.sprite(game.world.centerX, game.world.centerY, 'player');
+    player.anchor.setTo(0.5, 0.5);
+    player.scale.setTo(2, 2);
+  }
+  function updatePlayer() {
+
+  }
 };
