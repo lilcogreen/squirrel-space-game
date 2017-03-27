@@ -3,7 +3,7 @@ var count = 1;
 PImage squirrel;
 
 void setup() {
-	squirrel = loadImage("img/space_squirrel.gif");
+	squirrel = loadImage("../img/space_squirrel.gif");
 	size(800, 600);
 	drawHomeScreen();
 }
@@ -16,4 +16,3 @@ mouseClicked = function() {
 		drawHomeScreen();
 	}
 };
-
