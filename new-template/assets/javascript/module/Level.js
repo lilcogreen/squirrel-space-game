@@ -17,13 +17,13 @@ define(function(){
             _game = game;
         },
         preload: function() {
-            _game.load.image('sky', 'assets/img/sky.png');
+            _game.load.image('space', 'assets/img/background.jpg');
             _game.load.image('ground', 'assets/img/platform.png');
             _game.load.image('star', 'assets/img/star.png');
         },
         create: function() {
             // add background for this level
-            _game.add.sprite(0,0,'sky');
+            _game.add.sprite(0,0,'space');
 
             //  The platforms group contains the ground and the 2 ledges we can jump on
             _platforms = _game.add.group();
