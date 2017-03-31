@@ -67,21 +67,25 @@ window.onload = function() {
      {
            game.physics.arcade.accelerationFromRotation(sprite.rotation - 90, 200, sprite.body.acceleration);
            sprite.body.angularVelocity = 0;
+           sprite.animations.play('forward');
      }
     else if (cursors.left.isDown && cursors.right.isUp)
     {
           game.physics.arcade.accelerationFromRotation(sprite.rotation, 200, sprite.body.acceleration);
           sprite.body.angularVelocity = playerRotVel;
+          sprite.animations.play('left');
     }
     else if (cursors.right.isDown && cursors.left.isUp)
     {
           game.physics.arcade.accelerationFromRotation(sprite.rotation, 200, sprite.body.acceleration);
           sprite.body.angularVelocity = -playerRotVel;
+          sprite.animations.play('right');
     }
     else
     {
         sprite.body.angularVelocity = 0;
         sprite.body.acceleration.set(0);
+        _sprite.frame = 0;
     }
     screenWrap(sprite);
   }
