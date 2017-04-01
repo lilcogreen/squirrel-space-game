@@ -15,6 +15,7 @@ require(['module/Player','module/Level','module/HUD'],function(Player,Level,HUD)
         Player.preload();
 
         HUD.init(_game);
+        //HUD.preload();
     }
 
     function create() {
