@@ -5,11 +5,9 @@ Dependency: null
 define(function(){
 
     //Private variables
-    var _game = null;
-        /*_platforms = null,
-        _stars = null,
-        _ground = null,
-        _ledge = null;*/
+    var _game = null,
+        _oxygenCanister = null,
+        _fuelTank = null;
 
     //Public functions
     return{
@@ -19,12 +17,17 @@ define(function(){
         preload: function() {
             _game.load.image('space', 'assets/img/background.jpg');
             //_game.load.image('ground', 'assets/img/platform.png');
-            //_game.load.image('star', 'assets/img/star.png');
+            _game.load.image('oxygen', 'assets/img/oxygen_canister.png');
         },
         create: function() {
             // add background for this level
             _game.add.sprite(0,0,'space');
+            _game.physics.setBoundsToWorld();
+            _oxygenCanister = _game.add.sprite(-400, -500, 'oxygen');
+            _oxygenCanister.anchor.setTo(0.5, 0.5);
 
+            _oxygenCanister.enableBody = true;
+            _oxygenCanister.physicsBodyType = Phaser.Physics.ARCADE;
             //  The platforms group contains the ground and the 2 ledges we can jump on
             //_platforms = _game.add.group();
 
