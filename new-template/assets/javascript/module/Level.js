@@ -6,10 +6,8 @@ define(function(){
 
     //Private variables
     var _game = null,
-        _platforms = null,
-        _stars = null,
-        _ground = null,
-        _ledge = null;
+        _oxygenCanister = null,
+        _fuelTank = null;
 
     //Public functions
     return{
@@ -18,34 +16,39 @@ define(function(){
         },
         preload: function() {
             _game.load.image('space', 'assets/img/background.jpg');
-            _game.load.image('ground', 'assets/img/platform.png');
-            _game.load.image('star', 'assets/img/star.png');
+            //_game.load.image('ground', 'assets/img/platform.png');
+            _game.load.image('oxygen', 'assets/img/oxygen_canister.png');
         },
         create: function() {
             // add background for this level
             _game.add.sprite(0,0,'space');
+            _game.physics.setBoundsToWorld();
+            _oxygenCanister = _game.add.sprite(-400, -500, 'oxygen');
+            _oxygenCanister.anchor.setTo(0.5, 0.5);
 
+            _oxygenCanister.enableBody = true;
+            _oxygenCanister.physicsBodyType = Phaser.Physics.ARCADE;
             //  The platforms group contains the ground and the 2 ledges we can jump on
-            _platforms = _game.add.group();
+            //_platforms = _game.add.group();
 
             // Here we create the ground.
-            _ground = _platforms.create(0, _game.world.height - 64, 'ground');
+            //_ground = _platforms.create(0, _game.world.height - 64, 'ground');
 
             //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-            _ground.scale.setTo(2, 2);
+            //_ground.scale.setTo(2, 2);
 
             //  This stops it from falling away when you jump on it
-            _ground.body.immovable = true;
+            //_ground.body.immovable = true;
 
             //  Now let's create two ledges
-            _ledge = _platforms.create(400, 400, 'ground');
-            _ledge.body.immovable = true;
+            //_ledge = _platforms.create(400, 400, 'ground');
+            //_ledge.body.immovable = true;
 
-            _ledge = _platforms.create(-150, 250, 'ground');
-            _ledge.body.immovable = true;
-
+            //_ledge = _platforms.create(-150, 250, 'ground');
+            //_ledge.body.immovable = true;
+/*
             // create a group for stars
-            _stars = _game.add.group();
+            //_stars = _game.add.group();
 
             //  Here we'll create 12 of them evenly spaced apart
             for (var i = 0; i < 12; i++)
@@ -59,9 +62,10 @@ define(function(){
                 //  This just gives each star a slightly random bounce value
                 _star.body.bounce.y = 0.7 + Math.random() * 0.2;
             }
+    */
         },
         update: function() {
-		  _game.physics.collide(_stars, _platforms);
+		        //_game.physics.collide(_stars, _platforms);
         },
         getPlatforms: function() {
             return _platforms;
