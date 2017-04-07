@@ -87,19 +87,19 @@ define(['lib/phaser.min','module/HUD','module/Level'],function(Phaser,HUD,Level)
         _game.physics.arcade.accelerationFromRotation((_sprite.rotation - 89.6), 200, _sprite.body.acceleration);
         _sprite.body.angularVelocity = 0;
         _sprite.animations.play('forward');
-        _fuel -= .04;
+        HUD.depleteFuel(.1);
       }
       else if (_cursors.left.isDown && _cursors.right.isUp) {
         _game.physics.arcade.accelerationFromRotation(_sprite.rotation, -200, _sprite.body.acceleration);
         _sprite.body.angularVelocity = _playerRotVel;
         _sprite.animations.play('left');
-        _fuel -= .02;
+        HUD.depleteFuel(.05);
       }
       else if (_cursors.right.isDown && _cursors.left.isUp) {
         _game.physics.arcade.accelerationFromRotation(_sprite.rotation, 200, _sprite.body.acceleration);
         _sprite.body.angularVelocity = -_playerRotVel;
         _sprite.animations.play('right');
-        _fuel -= .02;
+        HUD.depleteFuel(.05);
       }
       else {
         _sprite.body.angularVelocity = 0;
@@ -108,6 +108,7 @@ define(['lib/phaser.min','module/HUD','module/Level'],function(Phaser,HUD,Level)
       }
       HUD.depleteOxygen();
       HUD.updateOxygenText();
+      HUD.updateFuelText();
       _screenWrap(_sprite);
     }
   }

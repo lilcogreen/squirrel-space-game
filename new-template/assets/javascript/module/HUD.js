@@ -18,6 +18,7 @@ define(function(){
         init: function(game) {
             _game = game;
             _oxygen = 100.0;
+            _fuel = 100.0
         },
         create: function() {
 		        _scoreText = _game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#d7adf0' });
@@ -31,16 +32,25 @@ define(function(){
             _scoreText.content = 'Score: ' + _score;
         },
         depleteOxygen: function() {
-            _oxygen-=.01;
+            _oxygen-=.05;
         },
         updateOxygenText: function() {
             _oxygenText.text = 'Oxygen: ' + Math.round(_oxygen);
+            if(_oxygen < 0) {
+              _oxygen = 0;
+            }
         },
-        addToFuel: function(value) {
-            _score+=10;
+        refuel: function() {
+            _fuel = 100.0;
+        },
+        depleteFuel: function(value) {
+            _fuel -= value;
         },
         updateFuelText: function() {
-            _fuelText.content = 'Fuel: ' + _score;
+            _fuelText.text = 'Fuel: ' + Math.round(_fuel);
+            if (_fuel<0){
+              _fuel = 0;
+            }
         }
     }
 });
