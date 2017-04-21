@@ -11,7 +11,7 @@ define(['lib/phaser.min','module/HUD','module/Level'],function(Phaser,HUD,Level)
   var _playerRotVel = 200;
   var _friction = .93;
   var _oxygenDepletion = -1;
-  var _fuel = 100.0;
+  var _fuel = 0;
 
   //Private functions
   var _collectStar = function(player, star){
@@ -41,11 +41,20 @@ define(['lib/phaser.min','module/HUD','module/Level'],function(Phaser,HUD,Level)
         _sprite.y = 0;
     }
   }
-
+  function refuel() {
+      _fuel = 100.0;
+  }
+  function depleteFuel(value) {
+      _fuel -= value;
+      if (_fuel<0){
+        _fuel = 0;
+      }
+  }
   //public functions
   return {
     init: function(game) {
         _game = game;
+        _fuel = 100.0;
     },
     preload: function() {
         _game.load.spritesheet('player', 'assets/img/space-squirrel.png', 50, 50);
@@ -82,33 +91,34 @@ define(['lib/phaser.min','module/HUD','module/Level'],function(Phaser,HUD,Level)
       //_game.physics.overlap(_sprite, Level.getStars(), _collectStar, null, this);
 
       //  _sprite.body.velocity.x = 0;
+        if (_cursors.left.isDown && _cursors.right.isDown && _fuel > 0) {
+          _game.physics.arcade.accelerationFromRotation((_sprite.rotation - 89.6), 200, _sprite.body.acceleration);
+          _sprite.body.angularVelocity = 0;
+          _sprite.animations.play('forward');
+          depleteFuel(.1);
+        }
+        else if (_cursors.left.isDown && _cursors.right.isUp && _fuel > 0) {
+          _game.physics.arcade.accelerationFromRotation(_sprite.rotation, -200, _sprite.body.acceleration);
+          _sprite.body.angularVelocity = _playerRotVel;
+          _sprite.animations.play('left');
+          depleteFuel(.05);
+        }
+        else if (_cursors.right.isDown && _cursors.left.isUp && _fuel > 0) {
+          _game.physics.arcade.accelerationFromRotation(_sprite.rotation, 200, _sprite.body.acceleration);
+          _sprite.body.angularVelocity = -_playerRotVel;
+          _sprite.animations.play('right');
+          depleteFuel(.05);
+        }
 
-      if (_cursors.left.isDown && _cursors.right.isDown) {
-        _game.physics.arcade.accelerationFromRotation((_sprite.rotation - 89.6), 200, _sprite.body.acceleration);
-        _sprite.body.angularVelocity = 0;
-        _sprite.animations.play('forward');
-        HUD.depleteFuel(.1);
-      }
-      else if (_cursors.left.isDown && _cursors.right.isUp) {
-        _game.physics.arcade.accelerationFromRotation(_sprite.rotation, -200, _sprite.body.acceleration);
-        _sprite.body.angularVelocity = _playerRotVel;
-        _sprite.animations.play('left');
-        HUD.depleteFuel(.05);
-      }
-      else if (_cursors.right.isDown && _cursors.left.isUp) {
-        _game.physics.arcade.accelerationFromRotation(_sprite.rotation, 200, _sprite.body.acceleration);
-        _sprite.body.angularVelocity = -_playerRotVel;
-        _sprite.animations.play('right');
-        HUD.depleteFuel(.05);
-      }
-      else {
+
+      else{
         _sprite.body.angularVelocity = 0;
         _sprite.body.acceleration.set(0);
         _sprite.frame = 0;
       }
       HUD.depleteOxygen();
       HUD.updateOxygenText();
-      HUD.updateFuelText();
+      HUD.updateFuelText(_fuel);
       _screenWrap(_sprite);
     }
   }
