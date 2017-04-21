@@ -23,8 +23,8 @@ require(['module/Player','module/Level','module/HUD', 'module/Thing'],function(P
 
     function create() {
         Level.create();
-        Player.create(_game);
         Thing.create(_game);
+        Player.create(_game);
         HUD.create();
     }
 
