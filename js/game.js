@@ -85,7 +85,7 @@ window.onload = function() {
     {
         sprite.body.angularVelocity = 0;
         sprite.body.acceleration.set(0);
-        _sprite.frame = 0;
+        sprite.frame = 0;
     }
     screenWrap(sprite);
   }
